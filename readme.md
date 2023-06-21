@@ -67,3 +67,7 @@ Sentiment Analysis App
 * The application is built using **Streamlit**, a Python library for creating web applications.
 
 * Sentiment analysis is performed using the **NLTK** library and the VADER sentiment analysis model.
+
+## Find the FLASK app of the same here
+
+https://sentiment-app2.onrender.com/
