@@ -3,6 +3,7 @@ from nltk.sentiment import SentimentIntensityAnalyzer
 import nltk
 
 nltk.download('vader_lexicon')
+st.set_page_config(page_title="Streamlit Sentiment App", page_icon="static/res/favicon.png")
 
 def predict_sentiment(text):
     sid = SentimentIntensityAnalyzer()
@@ -45,7 +46,7 @@ def main():
         ''',
     unsafe_allow_html=True
     )
-        
+
     st.title('Sentiment Analysis App ❤️🔥')
     #text = st.text_area('Enter text:')
     default_text = "I am feeling great today!"
