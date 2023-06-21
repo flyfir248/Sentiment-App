@@ -36,4 +36,4 @@ def predict_sentiment():
     return render_template('index.html', sentiment=sentiment, sentiment_color=sentiment_color, sentiment_size=sentiment_size, sentiment_weight=sentiment_weight)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000)
