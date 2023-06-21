@@ -42,7 +42,8 @@ The predicted sentiment will be displayed below the button with color and style 
 ## Demo
 
 * This is the 1st visiting page which welcomes you
-![img.png](img.png)
+
+* ![img.png](img.png)
 
 * Enter any text and press the **Predict Sentiment** button.
 
@@ -52,15 +53,15 @@ The predicted sentiment will be displayed below the button with color and style 
 
 * The same app in flask can look like this :
 
-* ![img_2.png](img_2.png)
+![img_2.png](img_2.png)
 
 * Enter some text
 
-* ![img_3.png](img_3.png)
+![img_3.png](img_3.png)
 
 * The predicted the sentiment
 
-* ![img_4.png](img_4.png)
+![img_4.png](img_4.png)
 
 ## Example
 
