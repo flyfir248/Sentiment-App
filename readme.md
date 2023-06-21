@@ -43,7 +43,7 @@ The predicted sentiment will be displayed below the button with color and style 
 
 * This is the 1st visiting page which welcomes you
 
-* ![img.png](img.png)
+![img.png](img.png)
 
 * Enter any text and press the **Predict Sentiment** button.
 
