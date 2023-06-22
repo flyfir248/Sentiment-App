@@ -8,7 +8,6 @@ import PyPDF2
 import docx
 import spacy
 from spacy import displacy
-
 import nlp as nlp
 
 nltk.download("vader_lexicon")
