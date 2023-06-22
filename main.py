@@ -1,13 +1,37 @@
 import streamlit as st
 from nltk.sentiment import SentimentIntensityAnalyzer
+from langdetect import detect
 import nltk
+import pandas as pd
+import matplotlib.pyplot as plt
 
 nltk.download('vader_lexicon')
+nltk.download('punkt')
 st.set_page_config(page_title="Streamlit Sentiment App", page_icon="static/res/favicon.png")
 
-def predict_sentiment(text):
+
+def predict_sentiment(text, language):
     sid = SentimentIntensityAnalyzer()
-    sentiment_scores = sid.polarity_scores(text)
+
+    if language == 'en':
+        sentiment_scores = sid.polarity_scores(text)
+    elif language == 'es':
+        sid_spanish = SentimentIntensityAnalyzer()
+        sentiment_scores = sid_spanish.polarity_scores(text)
+    # Add more elif conditions for other languages
+    elif language == 'af':
+        # Load sentiment analysis model for Afrikaans
+        sid_afrikaans = SentimentIntensityAnalyzer()
+        sentiment_scores = sid_afrikaans.polarity_scores(text)
+    elif language == 'ar':
+        # Load sentiment analysis model for Arabic
+        sid_arabic = SentimentIntensityAnalyzer()
+        sentiment_scores = sid_arabic.polarity_scores(text)
+    elif language == 'bg':
+        # Load sentiment analysis model for Bulgarian
+        sid_bulgarian = SentimentIntensityAnalyzer()
+        sentiment_scores = sid_bulgarian.polarity_scores(text)
+    # Add more elif conditions for other languages
 
     if sentiment_scores['compound'] >= 0.05:
         sentiment = 'Positive'
@@ -29,6 +53,7 @@ def predict_sentiment(text):
     confidence_score = round(confidence_score, 2)  # Round the confidence score to two decimal places
 
     return sentiment, sentiment_color, sentiment_size, sentiment_weight, confidence_score
+
 
 def main():
     st.markdown(
@@ -52,16 +77,42 @@ def main():
 
     st.title('Sentiment Analysis App ❤️🔥')
     default_text = "I am feeling great today!"
-    text = st.text_area('Enter text:', value=default_text)
-    if st.button('Predict Sentiment'):
-        sentiment, sentiment_color, sentiment_size, sentiment_weight, confidence_score = predict_sentiment(text)
-        st.markdown(
-            f'<p style="color: {sentiment_color}; font-size: {sentiment_size}; font-weight: {sentiment_weight};">'
-            f'Predicted Sentiment: {sentiment}<br>'
-            f'Confidence Score: {confidence_score}%'
-            '</p>',
-            unsafe_allow_html=True
-        )
+    texts = st.text_area('Enter multiple texts (separated by line breaks):', value=default_text, height=200)
+    text_list = texts.split('\n')
+
+    supported_languages = ['af', 'ar', 'bg', 'bn', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et', 'fa', 'fi',
+                           'fr', 'gu', 'he', 'hi', 'hr', 'hu', 'id', 'it', 'ja', 'kn', 'ko', 'lt', 'lv', 'mk', 'ml',
+                           'mr', 'ne', 'nl', 'no', 'pa', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'so', 'sq', 'sv', 'sw',
+                           'ta', 'te', 'th', 'tl', 'tr', 'uk', 'ur', 'vi', 'zh-cn', 'zh-tw']
+
+    selected_language = st.selectbox('Select the language of the texts:', supported_languages)
+
+    sentiment_data = []
+    for text in text_list:
+        if text.strip() != '':
+            language = selected_language if selected_language != 'auto' else detect(text)
+            sentiment, sentiment_color, sentiment_size, sentiment_weight, confidence_score = predict_sentiment(text,
+                                                                                                               language)
+            sentiment_data.append([text, sentiment, confidence_score])
+
+    if st.button('Predict Sentiments'):
+        if sentiment_data:
+            df = pd.DataFrame(sentiment_data, columns=['Text', 'Sentiment', 'Confidence Score'])
+            st.table(df)
+
+            sentiment_counts = df['Sentiment'].value_counts()
+            labels = sentiment_counts.index.tolist()
+            sizes = sentiment_counts.tolist()
+
+            fig, ax = plt.subplots()
+            ax.pie(sizes, labels=labels, autopct='%1.1f%%', startangle=90)
+            ax.axis('equal')  # Equal aspect ratio ensures that pie is drawn as a circle.
+            ax.set_title('Sentiment Distribution')
+
+            st.pyplot(fig)
+        else:
+            st.warning('Please enter some texts to analyze.')
+
     st.markdown(
         '''
         <style>
@@ -112,6 +163,7 @@ def main():
         ''',
         unsafe_allow_html=True
     )
+
 
 if __name__ == '__main__':
     main()
