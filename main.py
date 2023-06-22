@@ -210,7 +210,6 @@ def main():
         os.remove(temp_path)
 
     selected_language = st.selectbox("Select the language of the text:", ["English", "Spanish",'Afrikaans','Arabic','Bulgarian','Bengali','Catalan','Czech','Welsh','Danish','German','Greek','English','Spanish','Estonian','Persian (Farsi)','Finnish','French','Gujarati','Hebrew','Hindi','Croatian','Hungarian','Indonesian','Italian','Japanese','Kannada','Korean','Lithuanian','Latvian','Macedonian','Malayalam','Marathi','Nepali','Dutch','Norwegian','Punjabi','Polish','Portuguese','Romanian','Russian','Slovak','Slovenian','Somali','Albanian','Swedish','Swahili','Tamil','Telugu','Thai','Tagalog','Turkish','Ukrainian','Urdu','Vietnamese','Chinese (Simplified)','Chinese (Traditional)'])
-
     if st.button("Analyze"):
         sentiment_data = []
         for text in text_list:
