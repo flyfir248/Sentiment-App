@@ -8,7 +8,8 @@ import PyPDF2
 import docx
 import spacy
 from spacy import displacy
-import nlp as nlp
+import tempfile
+import os
 
 nltk.download("vader_lexicon")
 nltk.download("punkt")
@@ -145,6 +146,8 @@ def predict_sentiment(text, language, threshold_positive, threshold_negative):
         sentiment_scores = sid.polarity_scores(text)
     # ... add conditions for other languages
 
+    # ... add conditions for other languages
+
     threshold_positive = float(threshold_positive)
     threshold_negative = float(threshold_negative)
 
@@ -194,6 +197,17 @@ def main():
     default_text = "I am feeling great today!"
     texts = st.text_area("Enter multiple texts (separated by line breaks):", value=default_text, height=200)
     text_list = texts.split("\n")
+
+    uploaded_file = st.file_uploader("Upload a document:", type=["pdf", "docx"])
+
+    if uploaded_file is not None:
+        with tempfile.NamedTemporaryFile(delete=False) as temp_file:
+            temp_file.write(uploaded_file.getvalue())
+            temp_path = temp_file.name
+        document_text = extract_text_from_document(temp_path)
+        text_list.extend(document_text.split("\n"))
+        os.remove(temp_path)
+
     selected_language = st.selectbox("Select the language of the text:", ["English", "Spanish"])
 
     if st.button("Analyze"):
