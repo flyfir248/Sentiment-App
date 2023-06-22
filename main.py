@@ -140,6 +140,7 @@ def predict_sentiment(text, language, threshold_positive, threshold_negative):
         sentiment_scores = sid.polarity_scores(text)
     elif language == 'vi':
         sentiment_scores = sid.polarity_scores(text)
+
     elif language == 'zh-cn':
         sentiment_scores = sid.polarity_scores(text)
     elif language == 'zh-tw':
