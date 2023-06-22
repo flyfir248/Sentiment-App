@@ -238,6 +238,56 @@ def main():
     st.session_state.threshold_positive = threshold_positive
     st.session_state.threshold_negative = threshold_negative
 
+    st.markdown(
+        '''
+        <style>
+            .center-image {
+                display: flex;
+                justify-content: center;
+            }
+            .follow-me {
+                text-align: center;
+            }
+            .social-icons {
+                display: flex;
+                justify-content: center;
+                list-style: none;
+                padding: 0;
+            }
+            .social-icons li {
+                margin: 0 10px;
+            }
+        </style>
+        <body>
+            <div class="center-image">
+                <h4>Anoop Johny 🤖</h4>
+            </div>
+            <div class="center-image">
+                <h4>Follow Me</h4>
+            </div>
+            <div class="center-image">
+                <ul class="social-icons">
+                    <li><a href="https://www.linkedin.com/in/anoop-johny-30a746181/"><img src="https://pythonpythonme.netlify.app/static/res/linkedin.png" width="55" height="55" alt="LinkedIn"></a></li>
+                    <li><a href="https://github.com/flyfir248"><img src="https://pythonpythonme.netlify.app/static/res/github.png" width="55" height="55" alt="GitHub"></a></li>
+                    <li><a href="https://pythonpythonme.netlify.app/index.html"><img src="https://pythonpythonme.netlify.app/static/res/web.png" width="55" height="55" alt="Website"></a></li>
+                    <li><a href="https://medium.com/@anoopjohny2000"><img src="https://pythonpythonme.netlify.app/static/res/medium.png" width="55" height="55" alt="Medium"></a></li>
+                    <li><a href="https://www.kooapp.com/profile/anoop2DEVLJ"><img src="https://www.kooapp.com/_next/static/media/logoKuSolidOutline.1f4fa971.svg" width="55" height="55" alt="The Koo App" width="55" height="55"></a></li>
+                </ul>
+            </div>
+            <footer class="footer">
+                <div class="container">
+                    <div class="row">
+                        <div class="center-image">
+                            <p class="text-muted">© 2023-2024 PythonPythonME.</p>
+                            <p>All rights reserved.</p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </body>
+        ''',
+        unsafe_allow_html=True
+    )
 
 if __name__ == "__main__":
     main()
