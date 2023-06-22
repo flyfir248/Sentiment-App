@@ -25,7 +25,10 @@ def predict_sentiment(text):
         sentiment_size = '15px'
         sentiment_weight = 'normal'
 
-    return sentiment, sentiment_color, sentiment_size, sentiment_weight
+    confidence_score = sentiment_scores['compound'] * 100  # Calculate confidence score
+    confidence_score = round(confidence_score, 2)  # Round the confidence score to two decimal places
+
+    return sentiment, sentiment_color, sentiment_size, sentiment_weight, confidence_score
 
 def main():
     st.markdown(
@@ -44,18 +47,18 @@ def main():
         <p></p>
         <p></p>
         ''',
-    unsafe_allow_html=True
+        unsafe_allow_html=True
     )
 
     st.title('Sentiment Analysis App ❤️🔥')
-    #text = st.text_area('Enter text:')
     default_text = "I am feeling great today!"
     text = st.text_area('Enter text:', value=default_text)
     if st.button('Predict Sentiment'):
-        sentiment, sentiment_color, sentiment_size, sentiment_weight = predict_sentiment(text)
+        sentiment, sentiment_color, sentiment_size, sentiment_weight, confidence_score = predict_sentiment(text)
         st.markdown(
             f'<p style="color: {sentiment_color}; font-size: {sentiment_size}; font-weight: {sentiment_weight};">'
-            f'Predicted Sentiment: {sentiment}'
+            f'Predicted Sentiment: {sentiment}<br>'
+            f'Confidence Score: {confidence_score}%'
             '</p>',
             unsafe_allow_html=True
         )
